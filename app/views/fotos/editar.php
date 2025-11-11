@@ -1,7 +1,3 @@
-<?php
-/** @var object|App\Models\Foto $foto */
-?>
-
 <!DOCTYPE html>
 <html>
 <head>

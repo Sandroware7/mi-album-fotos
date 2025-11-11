@@ -17,24 +17,29 @@ class UsuarioController
     // GET /usuarios/{id}
     public function mostrar($id)
     {
-        $usuario = $this->usuarioModel->buscarPorId($id);
+        $usuario = $this->usuarioModel->buscarPorId($id); // ← define $usuario
+
         if (!$usuario) {
             http_response_code(404);
             echo "Usuario no encontrado.";
             return;
         }
-        include __DIR__ . '/../views/usuarios/show.php';
+
+        include __DIR__ . '/../views/usuarios/show.php'; // ← la vista recibe $usuario
     }
+
 
     // GET /usuarios/{id}/editar
     public function editar($id)
     {
-        $usuario = $this->usuarioModel->buscarPorId($id);
+        $usuario = $this->usuarioModel->buscarPorId($id); // ← define $usuario
         if (!$usuario) {
-            header('Location: ' . BASE_URL . '/usuarios');
-            exit;
+            http_response_code(404);
+            echo "Usuario no encontrado.";
+            return;
         }
-        include __DIR__ . '/../views/usuarios/edit.php';
+
+        include __DIR__ . '/../views/usuarios/edit.php'; // ← aquí se carga la vista con la variable disponible
     }
 
     // PUT /usuarios/{id}

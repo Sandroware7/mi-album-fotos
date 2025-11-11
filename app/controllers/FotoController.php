@@ -101,4 +101,19 @@ class FotoController {
         header('Location: ' . BASE_URL . '/fotos');
         exit;
     }
+
+    public function mostrar($id)
+    {
+        $foto = $this->fotoModel->buscar($id, $_SESSION['usuario_id']);
+
+        if (!$foto) {
+            http_response_code(404);
+            echo "Foto no encontrada.";
+            return;
+        }
+
+        include __DIR__ . '/../views/fotos/showFoto.php';
+    }
+
+
 }

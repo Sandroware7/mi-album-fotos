@@ -25,10 +25,23 @@ if ($ruta === '') {
 // Enrutamiento básico
 switch (true) {
     case $ruta === '/':
+        // Si hay sesión activa, redirige al álbum de fotos
+        if (isset($_SESSION['usuario_id'])) {
+            header('Location: ' . BASE_URL . '/fotos');
+            exit;
+        }
+        // Si no hay sesión, muestra la página de bienvenida
+        else {
+            include '../app/views/welcome.php';
+        }
+        break;
+
+// GET /fotos
     case $ruta === '/fotos':
         $controller = new App\Controllers\FotoController();
         $controller->index();
         break;
+
 
     case $ruta === '/fotos/crear':
         $controller = new App\Controllers\FotoController();
@@ -72,7 +85,7 @@ switch (true) {
             readfile($archivo);
             exit;
         }
-
+    // USUARIOS
     case preg_match('#^/usuarios/(\d+)$#', $ruta, $matches) && $_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PUT':
         $controller = new App\Controllers\UsuarioController();
         $controller->actualizar($matches[1]);
@@ -92,6 +105,13 @@ switch (true) {
         $controller = new App\Controllers\UsuarioController();
         $controller->editar($matches[1]);
         break;
+
+    // FOTOS
+    case preg_match('#^/fotos/(\d+)$#', $ruta, $matches):
+        $controller = new App\Controllers\FotoController();
+        $controller->mostrar($matches[1]);
+        break;
+
 
     // Si no existe el archivo, caer al 404
     // break; eliminado para caer al 404
