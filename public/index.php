@@ -4,6 +4,9 @@ require_once '../config/database.php';
 require_once '../config/session.php'; // <-- AÑADIR ESTA LÍNEA
 require_once '../config/config.php';
 
+use App\Controllers\AuthController;
+use App\Controllers\FotoController;
+use App\Controllers\UsuarioController;
 
 // Obtener la ruta relativa eliminando el base path
 $request_uri = $_SERVER['REQUEST_URI'];
@@ -69,9 +72,29 @@ switch (true) {
             readfile($archivo);
             exit;
         }
+
+    case preg_match('#^/usuarios/(\d+)$#', $ruta, $matches) && $_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'PUT':
+        $controller = new App\Controllers\UsuarioController();
+        $controller->actualizar($matches[1]);
+        break;
+
+    case preg_match('#^/usuarios/(\d+)$#', $ruta, $matches) && $_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'DELETE':
+        $controller = new App\Controllers\UsuarioController();
+        $controller->destruir($matches[1]);
+        break;
+
+    case preg_match('#^/usuarios/(\d+)$#', $ruta, $matches):
+        $controller = new App\Controllers\UsuarioController();
+        $controller->mostrar($matches[1]);
+        break;
+
+    case preg_match('#^/usuarios/(\d+)/editar$#', $ruta, $matches):
+        $controller = new App\Controllers\UsuarioController();
+        $controller->editar($matches[1]);
+        break;
+
     // Si no existe el archivo, caer al 404
     // break; eliminado para caer al 404
-
     default:
         http_response_code(404);
         echo "Página no encontrada: " . htmlspecialchars($ruta);

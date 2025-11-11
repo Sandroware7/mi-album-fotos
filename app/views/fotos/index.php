@@ -9,8 +9,13 @@
 </head>
 <body>
     <h1>Mi Álbum de Fotos</h1>
-    <p>Bienvenido, <?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Invitado') ?> | <a href="<?= BASE_URL ?>/logout">Salir</a></p>
-    <a href="<?= BASE_URL ?>/fotos/crear">Subir Nueva Foto</a>
+    <p>
+        Bienvenido, <?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Invitado') ?> |
+        <a href="<?= BASE_URL ?>/usuarios/<?= $_SESSION['usuario_id'] ?>">Mi perfil</a> |
+        <a href="<?= BASE_URL ?>/fotos/crear">Subir Nueva Foto</a>|
+        <a href="<?= BASE_URL ?>/logout">Salir</a>
+    </p>
+
 
     <div>
         <?php foreach ($fotos as $foto): ?>

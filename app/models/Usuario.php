@@ -29,9 +29,28 @@ class Usuario
         }
     }
 
-
     public function verificarPassword($password, $hash)
     {
         return password_verify($password, $hash);
     }
+
+    public function buscarPorId($id)
+    {
+        $stmt = $this->db->prepare("SELECT id, nombre, email FROM usuarios WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(\PDO::FETCH_OBJ);
+    }
+
+    public function actualizar($id, $nombre, $email)
+    {
+        $stmt = $this->db->prepare("UPDATE usuarios SET nombre = ?, email = ? WHERE id = ?");
+        return $stmt->execute([$nombre, $email, $id]);
+    }
+
+    public function eliminar($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM usuarios WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
 }
