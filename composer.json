@@ -1,0 +1,11 @@
+{
+  "name": "mi-album-fotos/mvc",
+  "description": "Album de Fotos MVC Minimalista",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "require": {}
+}
