@@ -20,13 +20,15 @@ class Usuario
 
     public function crear($email, $password, $nombre)
     {
-        $stmt = $this->db->prepare("INSERT INTO usuarios (email, password, nombre) VALUES (?, ?, ?)");
-        return $stmt->execute([
-            $email,
-            password_hash($password, PASSWORD_DEFAULT),
-            $nombre
-        ]);
+        try {
+            $stmt = $this->db->prepare("INSERT INTO usuarios (email, password, nombre) VALUES (?, ?, ?)");
+            $stmt->execute([$email, password_hash($password, PASSWORD_DEFAULT), $nombre]);
+            return true;
+        } catch (\PDOException $e) {
+            return ($e->errorInfo[1] == 1062) ? 'duplicate' : false;
+        }
     }
+
 
     public function verificarPassword($password, $hash)
     {

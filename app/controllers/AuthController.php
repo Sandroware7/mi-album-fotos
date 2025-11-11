@@ -43,14 +43,24 @@ class AuthController {
             $password = $_POST['password'] ?? '';
             $nombre = $_POST['nombre'] ?? '';
 
-            if ($this->usuarioModel->crear($email, $password, $nombre)) {
+            $resultado = $this->usuarioModel->crear($email, $password, $nombre);
+
+            if ($resultado === 'duplicate') {
+                $error = 'El correo ya está registrado.';
+                include __DIR__ . '/../views/auth/register.php';
+                return;
+            }
+
+            if ($resultado) {
+                $_SESSION['mensaje'] = '✅ Usuario creado correctamente. Inicia sesión para continuar.';
                 header('Location: ' . BASE_URL . '/login');
                 exit;
-            } else {
-                $error = "Error al crear usuario";
             }
+
+            $error = 'Error al crear usuario.';
         }
 
         include __DIR__ . '/../views/auth/register.php';
     }
+
 }

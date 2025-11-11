@@ -7,6 +7,11 @@
 <body>
     <h1>Iniciar Sesión</h1>
 
+    <?php if (isset($_SESSION['mensaje'])): ?>
+        <p style="color: green;"><?= htmlspecialchars($_SESSION['mensaje']) ?></p>
+        <?php unset($_SESSION['mensaje']); ?>
+    <?php endif; ?>
+
     <?php if (isset($error)): ?>
         <p style="color: red;"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>

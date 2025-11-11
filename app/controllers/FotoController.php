@@ -49,7 +49,7 @@ class FotoController {
         $foto = $this->fotoModel->buscar($id, $_SESSION['usuario_id']);
 
         if (!$foto) {
-            header('Location: ' . BASE_URL . '/fotos');
+            header('Location: /fotos');
             exit;
         }
 
@@ -59,8 +59,27 @@ class FotoController {
             if ($metodo === 'PUT') {
                 $titulo = $_POST['titulo'] ?? '';
                 $descripcion = $_POST['descripcion'] ?? '';
+                $archivo = $foto->archivo; // Mantiene la foto actual por defecto
 
-                $this->fotoModel->actualizar($id, $_SESSION['usuario_id'], $titulo, $descripcion);
+                // ✅ Verificar si se subió una nueva imagen
+                if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
+                    $extension = pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
+                    $nombre_archivo = uniqid() . '.' . $extension;
+                    $ruta_destino = __DIR__ . '/../../public/uploads/' . $nombre_archivo;
+
+                    if (move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta_destino)) {
+                        // Eliminar la imagen anterior si existe
+                        $ruta_anterior = __DIR__ . '/../../public/uploads/' . $foto->archivo;
+                        if (file_exists($ruta_anterior)) {
+                            unlink($ruta_anterior);
+                        }
+                        $archivo = $nombre_archivo;
+                    }
+                }
+
+                // ✅ Actualizar título, descripción y archivo
+                $this->fotoModel->actualizar($id, $_SESSION['usuario_id'], $titulo, $descripcion, $archivo);
+
                 header('Location: ' . BASE_URL . '/fotos');
                 exit;
             }
@@ -68,6 +87,7 @@ class FotoController {
 
         include __DIR__ . '/../views/fotos/editar.php';
     }
+
 
     public function eliminar($id) {
         if ($_POST) {

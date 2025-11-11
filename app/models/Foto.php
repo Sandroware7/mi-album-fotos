@@ -30,15 +30,16 @@ class Foto {
         ]);
     }
 
-    public function actualizar($id, $usuario_id, $titulo, $descripcion = '') {
-        $stmt = $this->db->prepare("UPDATE fotos SET titulo = ?, descripcion = ? WHERE id = ? AND usuario_id = ?");
-        return $stmt->execute([
-            htmlspecialchars($titulo),
-            htmlspecialchars($descripcion),
-            $id,
-            $usuario_id
-        ]);
+    public function actualizar($id, $usuario_id, $titulo, $descripcion, $archivo)
+    {
+        $stmt = $this->db->prepare("
+        UPDATE fotos 
+        SET titulo = ?, descripcion = ?, archivo = ? 
+        WHERE id = ? AND usuario_id = ?
+    ");
+        return $stmt->execute([$titulo, $descripcion, $archivo, $id, $usuario_id]);
     }
+
 
     public function eliminar($id, $usuario_id) {
         $foto = $this->buscar($id, $usuario_id);

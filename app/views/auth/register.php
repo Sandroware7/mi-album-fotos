@@ -7,6 +7,7 @@
 <body>
     <h1>Registrarse</h1>
 
+
     <?php if (isset($error)): ?>
         <p style="color: red;"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
