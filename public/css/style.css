@@ -1,0 +1,236 @@
+/* 🎨 Estilo general */
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #bfc9ca;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* 🧭 Encabezado general */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 30px;
+}
+
+/* 📦 Contenedor principal */
+body > div, .container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+/* 🔗 Barra superior */
+p {
+    text-align: center;
+    background: #4a8573;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-weight: 600;
+    margin: 5px 10px; /* ← agrega espacio lateral */
+
+}
+
+p.no-style {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    font-weight: normal;
+    text-align: center;
+}
+
+p a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    margin: 0 10px;
+    display: inline-block; /* ← necesario para que transform funcione */
+    transition: transform 0.05s ease-in-out; /* ← suaviza el efecto */
+    text-shadow: 0.5px 0.5px 0.6px rgb(0, 0, 0);
+}
+
+p a:hover {
+    color: #000000;
+    transform: scale(1.1);
+}
+
+/* 🖼️ Tarjeta de foto */
+div > div {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+div > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+}
+
+h3 {
+    margin: 10px 0;
+    color: #34495e;
+}
+
+/* 📷 Imágenes */
+img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 🧱 Botones */
+button,
+input[type="submit"] {
+    background-color: #1186d5;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #0f75ac;
+}
+
+/* 🔴 Botones de eliminación */
+button.delete,
+input[type="submit"].delete {
+    background-color: #d52a0d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+button.delete:hover,
+input[type="submit"].delete:hover {
+    background-color: #a60a00;
+}
+
+/* 🧾 Formularios */
+form {
+    margin-top: 10px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* 💬 Mensajes */
+p[style*="color: red"],
+p[style*="color: green"] {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* 🖥️ Responsive */
+@media (min-width: 700px) {
+    .foto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    div > div {
+        margin: 0;
+    }
+}
+
+/* 🖼️ Logo fijo arriba a la izquierda */
+.logo-link {
+    display: inline-block;
+    position: fixed;
+    top: 15px;
+    left: 25px;
+    z-index: 1000;
+    text-decoration: none;
+}
+
+/* 🖼️ Logo más pequeño y equilibrado */
+.logo {
+    height: 70px;         /* 🔹 reduce el alto */
+    width: auto;          /* mantiene proporción */
+    object-fit: contain;  /* evita deformaciones */
+    transition: transform 0.2s ease;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 30vh;
+}
+
+form.auth-form {
+    background: #4a8573;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 410px;
+    text-align: left;
+}
+
+.layout {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+}
+
+main.fondoInicio {
+    position: relative;
+    padding: 80px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    min-height: 85vh;
+}
+
+main.fondoInicio::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/fondoWelcome.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5; /* controla la transparencia SOLO del fondo */
+    z-index: -1; /* lo coloca detrás del contenido */
+}
+
