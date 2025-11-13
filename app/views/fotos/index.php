@@ -16,19 +16,20 @@
             <p>
                 Bienvenido, <?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Invitado') ?> |
                 <a href="<?= BASE_URL ?>/usuarios/<?= $_SESSION['usuario_id'] ?>">Mi perfil</a> |
-                <a href="<?= BASE_URL ?>/fotos/crear">Subir Nueva Foto</a> |
+                <a href="<?= BASE_URL ?>/fotos/crear">Subir Foto</a> |
                 <a href="<?= BASE_URL ?>/logout" onclick="return confirm('¿Estás seguro de que quieres salir?');">Salir</a>
             </p>
 
             <div class="foto-grid">
                 <?php if (empty($fotos)): ?>
-                    <p style="text-align:center; font-weight:bold; color:#777; margin-top:30px;">
+                    <p class="no-style" style="color: #232323;">
                         😅 ¡Ups! Tu álbum está vacío. <br>
-                        <a href="<?= BASE_URL ?>/fotos/crear" style="color:#3498db; text-decoration:none;">
-                            📸 Sube tu primera foto aquí
+                        <a href="<?= BASE_URL ?>/fotos/crear" style="color:#1583c3; text-decoration:none;">
+                            Sube tu primera foto aquí
                         </a>
                     </p>
                 <?php else: ?>
+                    <!-- bucle para mostrar cada foto del album -->
                     <?php foreach ($fotos as $foto): ?>
                         <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
                             <h3><?= htmlspecialchars($foto->titulo) ?></h3>

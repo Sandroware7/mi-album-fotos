@@ -1,4 +1,4 @@
-/* 🎨 Estilo general */
+/* estilo general */
 body {
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: #bfc9ca;
@@ -8,21 +8,21 @@ body {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* 🧭 Encabezado general */
+/* encabezado general */
 h1 {
     text-align: center;
     color: #2c3e50;
     margin-top: 30px;
 }
 
-/* 📦 Contenedor principal */
+/* contenedor principal */
 body > div, .container {
     width: 90%;
     max-width: 1000px;
     margin: 20px auto;
 }
 
-/* 🔗 Barra superior */
+/* barra superior */
 p {
     text-align: center;
     background: #4a8573;
@@ -58,7 +58,7 @@ p a:hover {
     transform: scale(1.1);
 }
 
-/* 🖼️ Tarjeta de foto */
+/* tarjeta de foto */
 div > div {
     background: #fff;
     border-radius: 10px;
@@ -79,14 +79,14 @@ h3 {
     color: #34495e;
 }
 
-/* 📷 Imágenes */
+/* imágenes */
 img {
     border-radius: 8px;
     max-width: 100%;
     height: auto;
 }
 
-/* 🧱 Botones */
+/* botones */
 button,
 input[type="submit"] {
     background-color: #1186d5;
@@ -105,7 +105,7 @@ input[type="submit"]:hover {
     background-color: #0f75ac;
 }
 
-/* 🔴 Botones de eliminación */
+/* botones de eliminación */
 button.delete,
 input[type="submit"].delete {
     background-color: #d52a0d;
@@ -123,7 +123,7 @@ input[type="submit"].delete:hover {
     background-color: #a60a00;
 }
 
-/* 🧾 Formularios */
+/* formularios */
 form {
     margin-top: 10px;
     text-align: center;
@@ -148,14 +148,14 @@ textarea {
     box-sizing: border-box;
 }
 
-/* 💬 Mensajes */
+/* mensajes */
 p[style*="color: red"],
 p[style*="color: green"] {
     text-align: center;
     font-weight: bold;
 }
 
-/* 🖥️ Responsive */
+/* responsive */
 @media (min-width: 700px) {
     .foto-grid {
         display: grid;
@@ -168,7 +168,7 @@ p[style*="color: green"] {
     }
 }
 
-/* 🖼️ Logo fijo arriba a la izquierda */
+/* logo fijo arriba a la izquierda */
 .logo-link {
     display: inline-block;
     position: fixed;
@@ -178,14 +178,15 @@ p[style*="color: green"] {
     text-decoration: none;
 }
 
-/* 🖼️ Logo más pequeño y equilibrado */
+/* logo mas pequeño */
 .logo {
-    height: 70px;         /* 🔹 reduce el alto */
-    width: auto;          /* mantiene proporción */
-    object-fit: contain;  /* evita deformaciones */
+    height: 70px;
+    width: auto;
+    object-fit: contain;
     transition: transform 0.2s ease;
 }
 
+/* formularios login y register */
 .form-container {
     display: flex;
     justify-content: center;
@@ -202,6 +203,7 @@ form.auth-form {
     text-align: left;
 }
 
+/* para mantener el footer siempre abajo */
 .layout {
     display: grid;
     min-height: 100dvh;
@@ -230,7 +232,7 @@ main.fondoInicio::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.5; /* controla la transparencia SOLO del fondo */
-    z-index: -1; /* lo coloca detrás del contenido */
+    opacity: 0.5;
+    z-index: -1;
 }
 

@@ -11,6 +11,7 @@ class AuthController {
         //session_start();
     }
 
+    // metodo para manejar el inicio de sesion
     public function login() {
         if ($_POST) {
             $email = $_POST['email'] ?? '';
@@ -31,12 +32,14 @@ class AuthController {
         include __DIR__ . '/../views/auth/login.php';
     }
 
+    // metodo para manejar el cierre de sesión
     public function logout() {
         session_destroy();
         header('Location: ' . BASE_URL . '/login');
         exit;
     }
 
+    // metodo para manejar el registro de un nuevo usuario
     public function register() {
         if ($_POST) {
             $email = $_POST['email'] ?? '';
@@ -52,7 +55,7 @@ class AuthController {
             }
 
             if ($resultado) {
-                $_SESSION['mensaje'] = '✅ Usuario creado correctamente. Inicia sesión para continuar.';
+                $_SESSION['mensaje'] = 'Usuario creado correctamente. Inicia sesión para continuar.';
                 header('Location: ' . BASE_URL . '/login');
                 exit;
             }

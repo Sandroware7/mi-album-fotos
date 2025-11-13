@@ -1,9 +1,8 @@
 <?php
 
-// config/config.php
 
-// BASE_URL -> ruta base relativa usada en los href/src (no incluye host)
-// Se calcula automáticamente a partir del script actual (/mi-album-fotos/public por ejemplo)
+// BASE_URL → Ruta base del proyecto para usar en enlaces (no incluye el host)
+// Se calcula automáticamente según la ubicación del archivo index.php
 $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
 $basePath = str_replace('/index.php', '', $scriptName);
 if ($basePath === '') {
@@ -11,8 +10,8 @@ if ($basePath === '') {
 }
 define('BASE_URL', $basePath);
 
-// UPLOAD_PATH -> ruta absoluta en disco para guardar/eliminar archivos
+// UPLOAD_PATH → Carpeta en el disco donde se guardan las fotos subidas
 define('UPLOAD_PATH', __DIR__ . '/../public/uploads/');
 
-// UPLOAD_URL -> url pública para acceder a las imágenes (BASE_URL + /uploads)
+// UPLOAD_URL → Ruta web para mostrar las fotos en el navegador
 define('UPLOAD_URL', rtrim(BASE_URL, '/') . '/uploads');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+//esta clase interactua con la base de datos para manejar a los usuarios
 class Usuario
 {
     private $db;

@@ -1,13 +1,14 @@
 <?php
 namespace App\Models;
 
+//esta clase interactua con la base de datos para manejar las fotos de un usuario
 class Foto {
     private $db;
 
     public function __construct() {
         $this->db = \Database::getConnection();
     }
-
+    // metodo para obtener todas las fotos de un usuario específico.
     public function todasPorUsuario($usuario_id) {
         $stmt = $this->db->prepare("SELECT * FROM fotos WHERE usuario_id = ? ORDER BY subida_en DESC");
         $stmt->execute([$usuario_id]);

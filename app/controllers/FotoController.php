@@ -19,11 +19,13 @@ class FotoController {
         }
     }
 
+    // metodo para mostrar todas las fotos del usuario
     public function index() {
         $fotos = $this->fotoModel->todasPorUsuario($_SESSION['usuario_id']);
         include __DIR__ . '/../views/fotos/index.php';
     }
 
+    // metodo para crear una nueva foto (subirla).
     public function crear() {
         if ($_POST) {
             $titulo = $_POST['titulo'] ?? '';
@@ -45,6 +47,7 @@ class FotoController {
         include __DIR__ . '/../views/fotos/crear.php';
     }
 
+    // metodo para editar una foto existente.
     public function editar($id) {
         $foto = $this->fotoModel->buscar($id, $_SESSION['usuario_id']);
 
@@ -61,14 +64,14 @@ class FotoController {
                 $descripcion = $_POST['descripcion'] ?? '';
                 $archivo = $foto->archivo; // Mantiene la foto actual por defecto
 
-                // ✅ Verificar si se subió una nueva imagen
+                // verificar si se subio una nueva imagen
                 if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
                     $extension = pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
                     $nombre_archivo = uniqid() . '.' . $extension;
                     $ruta_destino = __DIR__ . '/../../public/uploads/' . $nombre_archivo;
 
                     if (move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta_destino)) {
-                        // Eliminar la imagen anterior si existe
+                        // eliminar la imagen anterior si existe
                         $ruta_anterior = __DIR__ . '/../../public/uploads/' . $foto->archivo;
                         if (file_exists($ruta_anterior)) {
                             unlink($ruta_anterior);
@@ -77,7 +80,7 @@ class FotoController {
                     }
                 }
 
-                // ✅ Actualizar título, descripción y archivo
+                // actualizar título, descripción y archivo
                 $this->fotoModel->actualizar($id, $_SESSION['usuario_id'], $titulo, $descripcion, $archivo);
 
                 header('Location: ' . BASE_URL . '/fotos');
@@ -88,7 +91,7 @@ class FotoController {
         include __DIR__ . '/../views/fotos/editar.php';
     }
 
-
+    // metodo para eliminar una foto.
     public function eliminar($id) {
         if ($_POST) {
             $metodo = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];

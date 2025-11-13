@@ -42,6 +42,7 @@
             <input type="file" name="archivo" accept="image/*" id="archivoInput">
         </div>
 
+        <!--Script para mostrar la vista previa de la nueva imagen seleccionada-->
         <script>
             const archivoInput = document.getElementById('archivoInput');
             const preview = document.getElementById('preview');
@@ -52,7 +53,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         preview.src = e.target.result;
-                        preview.style.display = 'block'; // mostrar la imagen solo cuando se selecciona
+                        preview.style.display = 'block';
                     }
                     reader.readAsDataURL(file);
                 } else {

@@ -14,7 +14,7 @@ class UsuarioController
         if (session_status() === PHP_SESSION_NONE) session_start();
     }
 
-    // GET /usuarios/{id}
+    // metodo para mostrar los detalles de un usuario
     public function mostrar($id)
     {
         $usuario = $this->usuarioModel->buscarPorId($id); // ← define $usuario
@@ -28,8 +28,7 @@ class UsuarioController
         include __DIR__ . '/../views/usuarios/show.php'; // ← la vista recibe $usuario
     }
 
-
-    // GET /usuarios/{id}/editar
+    // metodo para mostrar el formulario de edición de un usuario (GET /usuarios/{id}/editar).
     public function editar($id)
     {
         $usuario = $this->usuarioModel->buscarPorId($id); // ← define $usuario
@@ -42,7 +41,7 @@ class UsuarioController
         include __DIR__ . '/../views/usuarios/edit.php'; // ← aquí se carga la vista con la variable disponible
     }
 
-    // PUT /usuarios/{id}
+    // metodo para actualizar los datos de un usuario
     public function actualizar($id)
     {
         if (($_POST['_method'] ?? '') === 'PUT') {
@@ -59,7 +58,7 @@ class UsuarioController
     }
 
 
-    // DELETE /usuarios/{id}
+    // metodo para eliminar un usuario (DELETE /usuarios/{id}).
     public function destruir($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['_method'] ?? '') === 'DELETE') {

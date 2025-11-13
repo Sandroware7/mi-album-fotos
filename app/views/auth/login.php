@@ -15,7 +15,7 @@
             <h1>Iniciar Sesión</h1>
 
             <?php if (isset($_SESSION['mensaje'])): ?>
-                <p style="color: green;"><?= htmlspecialchars($_SESSION['mensaje']) ?></p>
+                <p style="color: #022c02;"><?= htmlspecialchars($_SESSION['mensaje']) ?></p>
                 <?php unset($_SESSION['mensaje']); ?>
             <?php endif; ?>
 
