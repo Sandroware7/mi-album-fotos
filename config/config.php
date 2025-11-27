@@ -1,6 +1,5 @@
 <?php
 
-
 // BASE_URL → Ruta base del proyecto para usar en enlaces (no incluye el host)
 // Se calcula automáticamente según la ubicación del archivo index.php
 $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
